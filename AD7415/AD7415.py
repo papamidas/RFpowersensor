@@ -1,6 +1,6 @@
 """
 MicroPython Class for AD7415 ±0.5°C Accurate, 10-Bit Digital Temperature Sensor in SOT-23
-Sep 25, 2025, Papamidas (DM1CR)
+Sep 7, 2025, Papamidas (DM1CR)
 
 """
 import machine

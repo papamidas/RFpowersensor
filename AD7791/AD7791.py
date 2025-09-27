@@ -311,6 +311,29 @@ if __name__ == "__main__":
     mode = adc.read_mode()
     adc.print_mode(mode[0])
     
+    print("set filter to CDIV1, 16.6sps:")
+    adc.write_filter("CDIV1", "16.6sps")
+    filter = adc.read_filter()
+    adc.print_filter(filter[0])
+
+    print("start unipolar single conversions:")
+    maxtries = 2000
+    for conv in range(10):
+        ctr=0
+        adc.start_unipolar_single_conversion()
+        for i in range(maxtries):
+            time.sleep_ms(1);
+            ctr+=1
+            if(adc.nRDY.value() == 0):
+                break
+        if ctr < maxtries:
+            print("Conversion #", conv, " ", end="")
+            print("ctr = ", ctr, "rdy = ", adc.nRDY.value(), " ", end="");
+            v = adc.read_unipolar_ADC_voltage()
+            print("ADC voltage: ", v )
+        else:
+            print("timeout")
+
     print("set filter to CDIV8, 9.5sps:")
     adc.write_filter("CDIV8", "9.5sps")
     filter = adc.read_filter()
